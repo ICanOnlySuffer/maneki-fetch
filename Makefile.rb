@@ -1,22 +1,6 @@
 
-CONFIG = {
-	'ASCII_FILE' => '',
-	'ASCII_COLOR' => '',
-	'SPECIAL_COLOR' => '',
-	'CLEAR_COLOR' => '',
-	'KEY_COLOR' => '',
-	'VALUE_COLOR' => '',
-	'LINE_0' => '',
-	'LINE_1' => '',
-	'LINE_2' => '',
-	'LINE_3' => '',
-	'LINE_4' => '',
-	'LINE_5' => ''
-}
-
-ARGV.each do |argv|
-	key, value = argv.split '=', 2
-	CONFIG[key] = value
+CONFIG = ARGV.to_h do |argv|
+	argv.split '=', 2
 end
 
 def column key, value
