@@ -23,12 +23,12 @@ else
 all: $(error kernel `$(KERNEL)` not supported)
 endif
 
-all: bin/ bin/psi
+all: bin/ bin/psf
 
 %/:
 	mkdir -p $@
 
-bin/psi:
+bin/psf:
 	ruby Makefile.rb \
 		ASCII_FILE='$(ASCII_FILE)' \
 		ASCII_COLOR='$(ASCII_COLOR)' \
@@ -42,13 +42,13 @@ bin/psi:
 		LINE_3='$(LINE_3)' \
 		LINE_4='$(LINE_4)' \
 		LINE_5='$(LINE_5)'
-	chmod +x bin/psi
+	chmod +x bin/psf
 
 install: all uninstall
-	cp -r bin/psi $(INSTALL_BIN_DIR)/psi
+	cp -r bin/psf $(INSTALL_BIN_DIR)/psf
 
 uninstall:
-	rm -r $(INSTALL_BIN_DIR)/psi
+	rm -rf $(INSTALL_BIN_DIR)/psf
 
 clean:
 	rm -rf bin/

@@ -36,7 +36,7 @@ ASCII_LINES = (
 INFO_LINES = 6.times.map do |i|
 end
 
-File.open 'bin/psi', ?w do |file|
+File.open 'bin/psf', ?w do |file|
 	file.write <<~TXT
 	#!/bin/env sh
 	
