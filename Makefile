@@ -44,7 +44,7 @@ bin/psf:
 		LINE_5='$(LINE_5)'
 	chmod +x bin/psf
 
-install: all uninstall
+install: all uninstall $(INSTALL_BIN_DIR)/
 	cp -r bin/psf $(INSTALL_BIN_DIR)/psf
 
 uninstall:
