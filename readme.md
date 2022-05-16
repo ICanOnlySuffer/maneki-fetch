@@ -7,7 +7,7 @@ by ufetch's.
 The actual script is created by the Makefiles and it's only 9 lines
 long.
 
-<p align="center"><img src="https://gitlab.com/ICanOnlySuffer/psf/-/raw/main/screenshot.png" width="200px"></p>
+[screenshot]("./screenshot.png")
 
 ## Installation
 
