@@ -7,7 +7,7 @@ by ufetch's.
 The actual script is created by the Makefiles and it's only 9 lines
 long.
 
-![screenshot]("screenshot.png")
+![screenshot](screenshot.png)
 
 ## Installation
 
