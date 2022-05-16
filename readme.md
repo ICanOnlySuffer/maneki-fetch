@@ -9,6 +9,12 @@ long.
 
 ## Installation
 
+**make dependencies:**
+
+- [Ruby](https://www.ruby-lang.org/)
+
+**commands:**
+
 	# make install clean
 
 ## Contibuting
