@@ -5,8 +5,8 @@ ifeq ($(NO_COLOR),)
 ASCII_COLOR   := \e[1;36m
 SPECIAL_COLOR := \e[1;36m
 CLEAR_COLOR   := \e[0m
-KEY_COLOR     := \e[1;36m
-VALUE_COLOR   := \e[1;37m
+KEY_COLOR     := \e[0;36m
+VALUE_COLOR   := \e[1;37;0m
 endif
 
 LINE_0 := user_at_host
