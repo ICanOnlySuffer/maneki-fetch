@@ -2,18 +2,18 @@
 ASCII_FILE := art/$(OS).txt
 
 ifeq ($(NO_COLOR),)
-ASCII_COLOR   := \e[36;1m
-SPECIAL_COLOR := \e[36;1m
+ASCII_COLOR   := \e[1;36m
+SPECIAL_COLOR := \e[1;36m
 CLEAR_COLOR   := \e[0m
-KEY_COLOR     := \e[0;36;2m
-VALUE_COLOR   := \e[37;0m
+KEY_COLOR     := \e[1;36m
+VALUE_COLOR   := \e[1;37m
 endif
 
 LINE_0 := user_at_host
 LINE_1 := kernel
 LINE_2 := host
 LINE_3 := uptime
-LINE_4 := none
+LINE_4 := battery
 LINE_5 := memory
 
 KERNEL := $(shell uname -s)
