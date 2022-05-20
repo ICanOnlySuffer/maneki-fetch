@@ -3,8 +3,13 @@ CONFIG = ARGV.to_h do |argv|
 	argv.split '=', 2
 end
 
-def column key, value
-	"#{CONFIG['KEY_COLOR']}#{key} #{CONFIG['VALUE_COLOR']}`#{value}`"
+class String
+	def column key
+		<<~TXT.chomp.gsub /[\n\s]+/, ' '
+			#{CONFIG['KEY_COLOR']}#{key} 
+			#{CONFIG['VALUE_COLOR']}#{chomp}
+		TXT
+	end
 end
 
 ASCII_LINES = (
@@ -12,49 +17,56 @@ ASCII_LINES = (
 		   /_____\\
 		    /, ,\\
 		    )<> (
-		   / / | \\
-		__/\\|  /__\\
-		\\_/----\\_/
+		   / / \\ \\
+		__(\\|  _\\_)
+		\\_/-___\\_/
 	TXT
 ).split ?\n
-INFO_LINES = 6.times.map do |i|
-end
 
-File.open 'bin/psf', ?w do |file|
-	file.write <<~TXT
-	#!/bin/env sh
-	
-	echo -en "\\
-	#{
-		ASCII_LINES.map.with_index do |ascii_line, i|
-			length = ascii_line.length
-			ascii_line.gsub! ?\\, '\\\\\\\\\\\\\\'
-			spacing = 12 - length + ascii_line.length
-			
-			info_line = case CONFIG["LINE_#{i}"]
-			when 'user_at_host'
-				"#{CONFIG['SPECIAL_COLOR']}$USER@`uname -n`"
-			when 'kernel'
-				column 'krl', 'uname -r'
-			when 'host'
-				column 'hst',
-					'cat /sys/devices/virtual/dmi/id/product_name'
-			when 'uptime'
-				column 'upt', "uptime -p | cut -d' ' -f2-"
-			when 'memory'
-				column 'mem',
-					"free -m | awk 'NR==2{print $3\"M / \"$2\"M\"}'"
-			else
-				''
-			end
-			
-			sprintf "%s%-#{spacing}s%s\n",
-				CONFIG['ASCII_COLOR'],
-				ascii_line,
-				info_line
-		end.join
-	}#{CONFIG['CLEAR_COLOR']}"
-	
-	TXT
-end
+File.write 'bin/psf', <<~TXT
+#!/bin/sh
+echo -e "\\
+#{
+	ASCII_LINES.map.with_index do |ascii_line, i|
+		spacing = 12 - ascii_line.length
+		CONFIG['ASCII_COLOR'] +
+		(ascii_line.gsub ?\\, '\\\\\\\\\\\\\\') +
+		' ' * spacing +
+		case CONFIG["LINE_#{i}"]
+		when 'user_at_host'
+			"#{CONFIG['SPECIAL_COLOR']}$USER@`uname -n`"
+		when 'kernel'
+			<<~TXT.column 'krl'
+				`uname -r`
+			TXT
+		when 'host'
+			<<~TXT.column 'hst'
+				`cat
+					/sys/devices/virtual/dmi/id/product_{name,version}
+					/sys/firmware/devicetree/base/model
+					2>/dev/null | tr '\\n' ' '`
+			TXT
+		when 'uptime'
+			<<~TXT.column 'upt'
+				`uptime -p | cut -d' ' -f2-`
+			TXT
+		when 'battery'
+			<<~TXT.column 'bat'
+				`cat \\`find
+					/sys/class/power_supply
+					-name 'BAT*' -print -quit
+					\\`/energy_{now,full}
+					| tr '\\n' ' '
+					| awk '{print $1/1000"k / " $2/1000"k"}'`
+			TXT
+		when 'memory'
+			<<~TXT.column 'mem'
+				`free -m | awk 'NR==2{print $3\"M / \"$2\"M\"}'`
+			TXT
+		else
+			''
+		end
+	end.join ?\n
+}#{CONFIG['CLEAR_COLOR']}"
+TXT
 
