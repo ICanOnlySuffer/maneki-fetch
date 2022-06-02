@@ -63,6 +63,11 @@ echo -e "\\
 			<<~TXT.column 'mem'
 				`free -m | awk 'NR==2{print $3\"M / \"$2\"M\"}'`
 			TXT
+		when 'disk'
+			<<~TXT.column 'dsk'
+				`df -h --output=used,size /
+				| awk 'FNR==2{print $1" / "$2}'`
+			TXT
 		else
 			''
 		end
