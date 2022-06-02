@@ -11,8 +11,7 @@ long.
 
 ## Dependencies
 
-Make:
-- [Ruby](https://www.ruby-lang.org/)
+- [Ruby](https://www.ruby-lang.org/) (make)
 
 ## Installation
 
@@ -39,6 +38,6 @@ Bug reports, suggestions and pull requests are welcome!
 
 What's more needed:
 - ASCII art of more operating systems
-- More fetching commands (disk, cpu, etc)
+- More fetching commands (cpu, terminal, hardware, etc)
 - Makefile.rb translation to POSIX shell
 
