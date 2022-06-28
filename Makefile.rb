@@ -68,6 +68,10 @@ echo -e "\\
 				`df -h --output=used,size /
 				| awk 'FNR==2{print $1" / "$2}'`
 			TXT
+		when 'shell'
+			<<~TXT.column 'shl'
+				`basename $SHELL`
+			TXT
 		else
 			''
 		end
