@@ -1,4 +1,4 @@
-# Pocha's Simple Fetch
+# Maneki Fetch
 
 A lightweight system information tool inspired by neofetch and most
 notably, pfetch. The ascii art is made from scratch but are inspired
