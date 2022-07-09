@@ -23,9 +23,9 @@ else
 all: $(error kernel `$(KERNEL)` not supported)
 endif
 
-all: bin/psf
+all: bin/mfetch
 
-bin/psf:
+bin/mfetch:
 	@mkdir -p bin/
 	ruby Makefile.rb \
 		ASCII_FILE='$(ASCII_FILE)' \
@@ -40,14 +40,14 @@ bin/psf:
 		LINE_3='$(LINE_3)' \
 		LINE_4='$(LINE_4)' \
 		LINE_5='$(LINE_5)'
-	chmod +x bin/psf
+	chmod +x bin/mfetch
 
 install: all uninstall
 	@mkdir -p $(INSTALL_BIN_DIR)/
-	cp -r bin/psf $(INSTALL_BIN_DIR)/psf
+	cp -r bin/mfetch $(INSTALL_BIN_DIR)/mfetch
 
 uninstall:
-	rm -rf $(INSTALL_BIN_DIR)/psf
+	rm -rf $(INSTALL_BIN_DIR)/mfetch
 
 clean:
 	rm -rf bin/

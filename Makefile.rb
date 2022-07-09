@@ -23,7 +23,7 @@ ASCII_LINES = (
 	TXT
 ).split ?\n
 
-File.write 'bin/psf', <<~TXT
+File.write 'bin/mfetch', <<~TXT
 #!/bin/sh
 echo -e "\\
 #{
